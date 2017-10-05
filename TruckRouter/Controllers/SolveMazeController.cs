@@ -8,10 +8,14 @@ namespace TruckRouter.Controllers {
 	[Route( "[controller]" )]
 	public class SolveMazeController:Controller {
 
+		private readonly IMazeSolver _mazeSolution;
+
+		public SolveMazeController( IMazeSolver mazeSolution ) {
+			_mazeSolution = mazeSolution;
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Post() {
-
-			MazeSolution result;
 
 			byte[] mazeBytes;
 
@@ -19,13 +23,10 @@ namespace TruckRouter.Controllers {
 				await Request.Body.CopyToAsync( ms );
 				mazeBytes = ms.ToArray();
 			}
-			
-			string mazeString = Encoding.UTF8.GetString( mazeBytes );
 
-			result = new MazeSolution( mazeString );
-			result.SolveMaze();
+			_mazeSolution.Solve( Encoding.UTF8.GetString( mazeBytes ) );
 
-			return Ok( result );
+			return Ok( _mazeSolution );
 
 		}
 	}
