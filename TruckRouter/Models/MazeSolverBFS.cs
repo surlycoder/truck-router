@@ -4,6 +4,8 @@ using System.Collections.Generic;
 namespace TruckRouter.Models {
 	public class MazeSolverBFS:BaseMazeSolver {
 
+		const string SafePathTokens = ".AB";
+
 		public override void Solve( string mazeString ) {
 
 			int startX, startY; // Starting X and Y values of maze
@@ -39,13 +41,14 @@ namespace TruckRouter.Models {
 
 		public Point GetShortestPathByBFS( string[,] srcMaze, int xStPos, int yStPos, int x1, int y1 ) {
 			Queue<Point> pointQueue = new Queue<Point>();
-			pointQueue.Enqueue( new Point( xStPos, yStPos, null ) );
+			pointQueue.Enqueue( new Point( xStPos, yStPos ) );
 
 			while ( pointQueue.Count > 0 ) {
 				Point currPoint = pointQueue.Dequeue();
 
-				if ( currPoint.X == x1 && currPoint.Y == y1 )
+				if ( currPoint.X == x1 && currPoint.Y == y1 ) {
 					return currPoint;
+				}
 
 				ProcessPoint( srcMaze, currPoint, pointQueue, currPoint.X + 1, currPoint.Y );
 				ProcessPoint( srcMaze, currPoint, pointQueue, currPoint.X - 1, currPoint.Y );
@@ -57,7 +60,7 @@ namespace TruckRouter.Models {
 
 		private void ProcessPoint( string[,] srcMaze, Point currPoint, Queue<Point> pointQueue, int x, int y ) {
 			if ( IsSafePoint( srcMaze, x, y ) ) {
-				wasHere[currPoint.X, currPoint.Y] = true;
+				wasHere[x, y] = true;
 				Point nextP = new Point( x, y, currPoint );
 				pointQueue.Enqueue( nextP );
 			}
@@ -67,8 +70,8 @@ namespace TruckRouter.Models {
 			if ( x >= 0 && x < srcMaze.GetLength( 0 ) &&
 				y >= 0 && x < srcMaze.GetLength( 1 ) ) {
 
-				if ( (srcMaze[x, y] == "A" || srcMaze[x, y] == "B" || srcMaze[x, y] == ".") &&
-				!wasHere[x, y] ) {
+				if ( !wasHere[x, y] &&
+					( SafePathTokens.IndexOf( srcMaze[x, y] ) > -1 ) ) {
 					return true;
 				}
 

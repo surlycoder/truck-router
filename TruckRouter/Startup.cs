@@ -17,7 +17,7 @@ namespace TruckRouter {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-			services.AddSingleton<IMazeSolver>( new MazeSolverDFS() );
+			services.AddTransient<IMazeSolver, MazeSolverBFS>( );
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
