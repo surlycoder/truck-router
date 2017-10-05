@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TruckRouter.Models;
@@ -25,10 +21,7 @@ namespace TruckRouter.Controllers {
 			
 			string mazeString = System.Text.Encoding.UTF8.GetString( mazeBytes );
 
-			result = new MazeSolution( mazeString ) {
-				Steps = 0,
-			};
-
+			result = new MazeSolution( mazeString );
 			result.SolveMaze();
 
 			return Ok( result );

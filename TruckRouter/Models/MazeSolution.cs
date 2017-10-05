@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TruckRouter.Models {
 	public class MazeSolution {
@@ -16,6 +14,7 @@ namespace TruckRouter.Models {
 
 		public MazeSolution( string mazeString ) {
 
+			//TODO: Fix split to eliminate last column ('')
 			var res = mazeString.Split( Environment.NewLine )
 				.Select( p => Regex.Split( p, "(?<=\\G.{1})" ) )
 				.ToArray();
@@ -36,7 +35,7 @@ namespace TruckRouter.Models {
 		}
 
 		public int Steps {
-			get; set;
+			get; private set;
 		}
 
 		public string Solution {
@@ -52,6 +51,7 @@ namespace TruckRouter.Models {
 		}
 
 		private int[][] GenerateMaze( string[][] m ) {
+			//TODO: Move constructor logic here
 			throw new NotImplementedException();
 		}
 
@@ -70,6 +70,7 @@ namespace TruckRouter.Models {
 		}
 
 		public bool RecursiveSolve( int x, int y ) {
+			//TODO: Avoid overwriting "A"
 			if ( x == endX && y == endY )
 				return true; // If you reached the end
 			if ( maze[x, y] == "#" || wasHere[x, y] )
@@ -79,21 +80,25 @@ namespace TruckRouter.Models {
 			if ( x != 0 ) // Checks if not on left edge
 				if ( RecursiveSolve( x - 1, y ) ) { // Recalls method one to the left
 					correctPath[x, y] = "@"; // Sets that path value to true;
+					Steps++;
 					return true;
 				}
 			if ( x != width - 1 ) // Checks if not on right edge
 				if ( RecursiveSolve( x + 1, y ) ) { // Recalls method one to the right
 					correctPath[x, y] = "@";
+					Steps++;
 					return true;
 				}
 			if ( y != 0 )  // Checks if not on top edge
 				if ( RecursiveSolve( x, y - 1 ) ) { // Recalls method one up
 					correctPath[x, y] = "@";
+					Steps++;
 					return true;
 				}
 			if ( y != height - 1 ) // Checks if not on bottom edge
 				if ( RecursiveSolve( x, y + 1 ) ) { // Recalls method one down
 					correctPath[x, y] = "@";
+					Steps++;
 					return true;
 				}
 			return false;
