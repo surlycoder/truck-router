@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TruckRouter.Models;
@@ -19,7 +20,7 @@ namespace TruckRouter.Controllers {
 				mazeBytes = ms.ToArray();
 			}
 			
-			string mazeString = System.Text.Encoding.UTF8.GetString( mazeBytes );
+			string mazeString = Encoding.UTF8.GetString( mazeBytes );
 
 			result = new MazeSolution( mazeString );
 			result.SolveMaze();
