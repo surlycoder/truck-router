@@ -1,66 +1,94 @@
 ﻿using System;
 
 namespace TruckRouter.Models {
+
+	/// <summary>
+	/// Maze solver using recursive depth-first search (DFS) algorithm
+	/// </summary>
 	public class MazeSolverDFS:BaseMazeSolver {
-		string[,] maze;
 
+		/// <summary>
+		/// Solve the maze
+		/// </summary>
+		/// <param name="mazeString"></param>
 		public override void Solve( string mazeString ) {
+			int startX, startY;
+			int endX, endY;
 
-			int startX, startY; // Starting X and Y values of maze
-			int endX, endY;     // Ending X and Y values of maze
+			string[,] maze = CreateMaze( mazeString );
 
-			maze = GenerateMaze( mazeString );
+			int rowCount = maze.GetLength( 0 );
+			int colCount = maze.GetLength( 1 );
 
-			wasHere = new bool[maze.GetLength( 0 ), maze.GetLength( 1 )];
-			correctPath = new string[maze.GetLength( 0 ), maze.GetLength( 1 )];
+			_visited = new bool[rowCount, colCount];
+			_mazePath = new string[rowCount, colCount];
 
-			(startX, startY) = maze.CoordinatesOf( "A" );
-			(endX, endY) = maze.CoordinatesOf( "B" );
+			for ( int row = 0; row < rowCount; row++ ) {
+				for ( int col = 0; col < colCount; col++ ) {
+					_visited[row, col] = false;
+					_mazePath[row, col] = maze[row, col];
+				}
+			}
+
+			(startX, startY) = maze.CoordinatesOf( StartToken );
+			(endX, endY) = maze.CoordinatesOf( EndToken );
 
 			Point start = new Point( startX, startY, null );
 			Point end = new Point( endX, endY, null );
 
-			for ( int row = 0; row < maze.GetLength( 0 ); row++ )
-				for ( int col = 0; col < maze.GetLength( 1 ); col++ ) {
-					wasHere[row, col] = false;
-					correctPath[row, col] = maze[row, col];
-				}
-			bool b = RecursiveSolve( startX, startY, start, end );
-			// Will leave you with a boolean array (correctPath) 
-			// with the path indicated by true values.
-			// If b is false, there is no solution to the maze
+			bool b = RecursiveSolve( maze, startX, startY, start, end );
 		}
 
-		private bool RecursiveSolve( int x, int y, Point start, Point end ) {
-			//TODO: Avoid overwriting "A"
-			if ( x == end.X && y == end.Y )
-				return true; // If you reached the end
-			if ( maze[x, y] == "#" || wasHere[x, y] )
+		/// <summary>
+		/// Recursively solve the maze
+		/// </summary>
+		/// <param name="maze"></param>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="start"></param>
+		/// <param name="end"></param>
+		/// <returns>Boolean indicating if there is a solution to the maze</returns>
+		private bool RecursiveSolve( string[,] maze, int x, int y, Point start, Point end ) {
+
+			if ( x == end.X && y == end.Y ) {
+				return true;
+			}
+
+			if ( maze[x, y] == WallToken || _visited[x, y] ) {
 				return false;
+			}
+
 			// If you are on a wall or already were here
-			wasHere[x, y] = true;
+			_visited[x, y] = true;
 			if ( x != 0 ) // Checks if not on left edge
-				if ( RecursiveSolve( x - 1, y, start, end ) ) { // Recalls method one to the left
+				if ( RecursiveSolve( maze, x - 1, y, start, end ) ) { // Recalls method one to the left
 					return ProcessPoint( x, y, start );
 				}
 			if ( x != maze.GetLength( 0 ) - 1 ) // Checks if not on right edge
-				if ( RecursiveSolve( x + 1, y, start, end ) ) { // Recalls method one to the right
+				if ( RecursiveSolve( maze, x + 1, y, start, end ) ) { // Recalls method one to the right
 					return ProcessPoint( x, y, start );
 				}
 			if ( y != 0 )  // Checks if not on top edge
-				if ( RecursiveSolve( x, y - 1, start, end ) ) { // Recalls method one up
+				if ( RecursiveSolve( maze, x, y - 1, start, end ) ) { // Recalls method one up
 					return ProcessPoint( x, y, start );
 				}
 			if ( y != maze.GetLength( 1 ) - 1 ) // Checks if not on bottom edge
-				if ( RecursiveSolve( x, y + 1, start, end ) ) { // Recalls method one down
+				if ( RecursiveSolve( maze, x, y + 1, start, end ) ) { // Recalls method one down
 					return ProcessPoint( x, y, start );
 				}
 			return false;
 		}
 
+		/// <summary>
+		/// Processes a point by adding it to the path and incrementing steps
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="start"></param>
+		/// <returns></returns>
 		private bool ProcessPoint( int x, int y, Point start ) {
 			if ( !( x == start.X && y == start.Y ) ) {
-				correctPath[x, y] = "@";
+				_mazePath[x, y] = PathToken;
 			}
 			Steps++;
 			return true;

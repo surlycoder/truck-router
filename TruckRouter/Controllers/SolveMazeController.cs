@@ -16,18 +16,28 @@ namespace TruckRouter.Controllers {
 
 		[HttpPost]
 		public async Task<IActionResult> Post() {
-
 			byte[] mazeBytes;
+			string mazeString;
 
-			using ( var ms = new MemoryStream() ) {
+			using ( MemoryStream ms = new MemoryStream() ) {
 				await Request.Body.CopyToAsync( ms );
+
+				if ( ms.Length == 0 ) {
+					return BadRequest();
+				}
+
 				mazeBytes = ms.ToArray();
+			}
+
+			mazeString = Encoding.UTF8.GetString( mazeBytes );
+
+			if ( !_mazeSolution.IsValidMaze( mazeString ) ) {
+				return BadRequest();
 			}
 
 			_mazeSolution.Solve( Encoding.UTF8.GetString( mazeBytes ) );
 
 			return Ok( _mazeSolution );
-
 		}
 	}
 }

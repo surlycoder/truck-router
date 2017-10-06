@@ -18,7 +18,7 @@
 		},
 		"TruckRouter": {
 			"commandName": "Project",
-			"launchBrowser": true,
+			"launchBrowser": false,
 			"launchUrl": "solvemaze",
 			"environmentVariables": {
 				"ASPNETCORE_ENVIRONMENT": "Development"
