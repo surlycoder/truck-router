@@ -8,7 +8,7 @@ This project is developed as a web service using ASP.NET Core Web API in Visual 
 
 ### Installation
 
-1. Clone the truck-router repo
+1. Clone or download the truck-router repo
 1. Open the solution file "TruckRouter.sln" in Visual Studio 2017
 1. Change the build configuration to "Release"
 1. Build the solution by selecting Build | Build Solution from the VS 2017 menu
