@@ -6,7 +6,7 @@ The goal of this project is to solve a truck routing problem. Given a text maze 
 
 This project is a web service developed using ASP.NET Core Web API in Microsoft Visual Studio 2017.
 
-## Prerequisites
+### Prerequisites
 
 - [Visual Studio 2017](https://www.visualstudio.com/downloads/)
 - [.NET Core 2.0 SDK or Runtime](https://www.microsoft.com/net/download/core)
