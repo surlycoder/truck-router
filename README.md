@@ -2,7 +2,7 @@
 
 The goal of this project is to solve a truck routing problem. Given a text maze with starting point "A" and ending point "B", find the shortest path from "A" to "B".
 
-## Implementation
+### Implementation
 
 This project is a web service developed using ASP.NET Core Web API in Microsoft Visual Studio 2017.
 
