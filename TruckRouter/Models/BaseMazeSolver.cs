@@ -107,7 +107,7 @@ namespace TruckRouter.Models {
 		/// <param name="input">String delimited by CRLFs</param>
 		/// <returns>Jagged array</returns>
 		private string[][] CreateJaggedArray( string input ) {
-			string[][] result = input.Split( Environment.NewLine )
+			string[][] result = input.Split( new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None )
 				.Select( p => Regex.Split( p, "(?<=\\G.{1})" ) )
 				.ToArray();
 

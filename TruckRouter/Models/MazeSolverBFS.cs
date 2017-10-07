@@ -39,12 +39,14 @@ namespace TruckRouter.Models {
 
 			Point p = GetShortestPathByBFS( maze, start, end );
 
-			while ( p.PreviousPoint != null ) {
-				if ( !p.Equals( end ) ) {
-					_mazePath[p.X, p.Y] = PathToken;
+			if ( p != null ) {
+				while ( p.PreviousPoint != null ) {
+					if ( !p.Equals( end ) ) {
+						_mazePath[p.X, p.Y] = PathToken;
+					}
+					Steps++;
+					p = p.PreviousPoint;
 				}
-				Steps++;
-				p = p.PreviousPoint;
 			}
 		}
 
