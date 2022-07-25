@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TruckRouter.Models;
 
-namespace TruckRouter {
-	public class Startup
+namespace TruckRouter
+{
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -16,18 +16,18 @@ namespace TruckRouter {
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-			services.AddTransient<IMazeSolver, MazeSolverBFS>( );
-		}
+            services.AddControllers();
+            services.AddTransient<IMazeSolver, MazeSolverBFS>();
 
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        }
+
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-
-			app.UseMvc();
+                endpoints.MapDefaultControllerRoute();
+            });
         }
     }
 }
