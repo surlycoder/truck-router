@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
 
 namespace TruckRouter.Models
@@ -16,11 +14,10 @@ namespace TruckRouter.Models
         protected const string WallToken = "#";
         protected const string OpenToken = ".";
         protected const string PathToken = "@";
-
         protected const string SafePathTokens = OpenToken + StartToken + EndToken;
 
-        protected bool[,] _visited;
-        protected string[,] _mazePath;
+        protected bool[,]? Visited { get; set; }
+        protected string[,]? MazePath { get; set; }
 
         /// <summary>
         /// The number of steps in the solution path
@@ -37,17 +34,17 @@ namespace TruckRouter.Models
         {
             get
             {
-                if (_mazePath == null)
+                if (MazePath == null)
                 {
                     return string.Empty;
                 }
 
-                StringBuilder sb = new StringBuilder();
-                int rowCount = _mazePath.GetLength(0);
+                StringBuilder sb = new();
+                int rowCount = MazePath.GetLength(0);
 
                 for (int i = 0; i < rowCount; i++)
                 {
-                    sb.Append(string.Join("", _mazePath.GetRow(i)));
+                    sb.Append(string.Join("", MazePath.GetRow(i)));
                     sb.Append('\n');
                 }
 
@@ -122,7 +119,7 @@ namespace TruckRouter.Models
         /// </summary>
         /// <param name="input">String delimited by CRLFs</param>
         /// <returns>Jagged array</returns>
-        private string[][] CreateJaggedArray(string input)
+        private static string[][] CreateJaggedArray(string input)
         {
             string[][] result = input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
                 .Select(p => Regex.Split(p, "(?<=\\G.{1})"))

@@ -48,7 +48,7 @@
         /// <summary>
         /// Reference to previous point
         /// </summary>
-        public Point PreviousPoint
+        public Point? PreviousPoint
         {
             get;
         }
@@ -58,7 +58,7 @@
         /// </summary>
         /// <param name="obj"></param>
         /// <returns>Boolean indicating of the comparison object is equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not Point comp)
             {

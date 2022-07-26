@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TruckRouter.Models
+﻿namespace TruckRouter.Models
 {
     /// <summary>
     /// Maze solver using breadth-first search (BFS) algorithm
@@ -22,25 +19,25 @@ namespace TruckRouter.Models
             int rowCount = maze.GetLength(0);
             int colCount = maze.GetLength(1);
 
-            _visited = new bool[rowCount, colCount];
-            _mazePath = new string[rowCount, colCount];
+            Visited = new bool[rowCount, colCount];
+            MazePath = new string[rowCount, colCount];
 
             for (int row = 0; row < rowCount; row++)
             {
                 for (int col = 0; col < colCount; col++)
                 {
-                    _visited[row, col] = false;
-                    _mazePath[row, col] = maze[row, col];
+                    Visited[row, col] = false;
+                    MazePath[row, col] = maze[row, col];
                 }
             }
 
             (startX, startY) = maze.CoordinatesOf(StartToken);
             (endX, endY) = maze.CoordinatesOf(EndToken);
 
-            Point start = new(startX, startY, null);
-            Point end = new(endX, endY, null);
+            Point start = new(startX, startY);
+            Point end = new(endX, endY);
 
-            Point p = GetShortestPathByBFS(maze, start, end);
+            Point? p = GetShortestPathByBFS(maze, start, end);
 
             if (p != null)
             {
@@ -48,7 +45,7 @@ namespace TruckRouter.Models
                 {
                     if (!p.Equals(end))
                     {
-                        _mazePath[p.X, p.Y] = PathToken;
+                        MazePath[p.X, p.Y] = PathToken;
                     }
                     Steps++;
                     p = p.PreviousPoint;
@@ -63,9 +60,9 @@ namespace TruckRouter.Models
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns>Point representing the completed solution</returns>
-        public Point GetShortestPathByBFS(string[,] maze, Point start, Point end)
+        public Point? GetShortestPathByBFS(string[,] maze, Point start, Point end)
         {
-            Queue<Point> pointQueue = new Queue<Point>();
+            Queue<Point> pointQueue = new();
             pointQueue.Enqueue(start);
 
             while (pointQueue.Count > 0)
@@ -97,8 +94,8 @@ namespace TruckRouter.Models
         {
             if (IsSafePoint(maze, x, y))
             {
-                _visited[x, y] = true;
-                Point nextPoint = new Point(x, y, currPoint);
+                Visited[x, y] = true;
+                Point nextPoint = new(x, y, currPoint);
                 pointQueue.Enqueue(nextPoint);
             }
         }
@@ -116,7 +113,7 @@ namespace TruckRouter.Models
                 y >= 0 && x < maze.GetLength(1))
             {
 
-                if (!_visited[x, y] &&
+                if (!Visited[x, y] &&
                     (SafePathTokens.IndexOf(maze[x, y]) > -1))
                 {
                     return true;

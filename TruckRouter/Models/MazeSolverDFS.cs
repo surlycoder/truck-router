@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TruckRouter.Models
+﻿namespace TruckRouter.Models
 {
     /// <summary>
     /// Maze solver using recursive depth-first search (DFS) algorithm
@@ -21,23 +19,23 @@ namespace TruckRouter.Models
             int rowCount = maze.GetLength(0);
             int colCount = maze.GetLength(1);
 
-            _visited = new bool[rowCount, colCount];
-            _mazePath = new string[rowCount, colCount];
+            Visited = new bool[rowCount, colCount];
+            MazePath = new string[rowCount, colCount];
 
             for (int row = 0; row < rowCount; row++)
             {
                 for (int col = 0; col < colCount; col++)
                 {
-                    _visited[row, col] = false;
-                    _mazePath[row, col] = maze[row, col];
+                    Visited[row, col] = false;
+                    MazePath[row, col] = maze[row, col];
                 }
             }
 
             (startX, startY) = maze.CoordinatesOf(StartToken);
             (endX, endY) = maze.CoordinatesOf(EndToken);
 
-            Point start = new Point(startX, startY, null);
-            Point end = new Point(endX, endY, null);
+            Point start = new(startX, startY);
+            Point end = new(endX, endY);
 
             _ = RecursiveSolve(maze, startX, startY, start, end);
         }
@@ -58,13 +56,12 @@ namespace TruckRouter.Models
                 return true;
             }
 
-            if (maze[x, y] == WallToken || _visited[x, y])
+            if (maze[x, y] == WallToken || Visited[x, y])
             {
                 return false;
             }
-
             // If you are on a wall or already were here
-            _visited[x, y] = true;
+            Visited[x, y] = true;
             if (x != 0) // Checks if not on left edge
                 if (RecursiveSolve(maze, x - 1, y, start, end))
                 { // Recalls method one to the left
@@ -99,7 +96,7 @@ namespace TruckRouter.Models
         {
             if (!(x == start.X && y == start.Y))
             {
-                _mazePath[x, y] = PathToken;
+                MazePath[x, y] = PathToken;
             }
             Steps++;
             return true;

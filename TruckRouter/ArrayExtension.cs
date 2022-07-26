@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TruckRouter
+﻿namespace TruckRouter
 {
     /// <summary>
     /// Extensions for array
@@ -9,7 +6,7 @@ namespace TruckRouter
     public static class ArrayExtensions
     {
         /// <summary>
-        /// Get a row in a given array by a given row index
+        /// Get a row in an array by a given row index
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
@@ -23,13 +20,13 @@ namespace TruckRouter
         }
 
         /// <summary>
-        /// Get coordinates of a given value found in a given matrix
+        /// Get coordinates of a given value in an array
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="matrix"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static Tuple<int, int> CoordinatesOf<T>(this T[,] matrix, T value)
+        public static Tuple<int, int> CoordinatesOf<T>(this T[,] matrix, T value) where T : notnull
         {
             int w = matrix.GetLength(0); // width
             int h = matrix.GetLength(1); // height
@@ -38,8 +35,11 @@ namespace TruckRouter
             {
                 for (int y = 0; y < h; ++y)
                 {
-                    if (matrix[x, y].Equals(value))
-                        return Tuple.Create(x, y);
+                    if (!matrix[x, y].Equals(value))
+                    {
+                        continue;
+                    }
+                    return Tuple.Create(x, y);
                 }
             }
 

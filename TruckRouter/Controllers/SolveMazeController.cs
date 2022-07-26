@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using TruckRouter.Models;
 
@@ -9,11 +7,11 @@ namespace TruckRouter.Controllers
     [Route("[controller]")]
     public class SolveMazeController : Controller
     {
-        private readonly IMazeSolver _mazeSolution;
+        private readonly IMazeSolver _mazeSolver;
 
-        public SolveMazeController(IMazeSolver mazeSolution)
+        public SolveMazeController(IMazeSolver mazeSolver)
         {
-            _mazeSolution = mazeSolution;
+            _mazeSolver = mazeSolver;
         }
 
         [HttpPost]
@@ -22,7 +20,7 @@ namespace TruckRouter.Controllers
             byte[] mazeBytes;
             string mazeString;
 
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new())
             {
                 await Request.Body.CopyToAsync(ms);
 
@@ -36,14 +34,14 @@ namespace TruckRouter.Controllers
 
             mazeString = Encoding.UTF8.GetString(mazeBytes);
 
-            if (!_mazeSolution.IsValidMaze(mazeString))
+            if (!_mazeSolver.IsValidMaze(mazeString))
             {
                 return BadRequest();
             }
 
-            _mazeSolution.Solve(Encoding.UTF8.GetString(mazeBytes));
+            _mazeSolver.Solve(Encoding.UTF8.GetString(mazeBytes));
 
-            return Ok(_mazeSolution);
+            return Ok(_mazeSolver);
         }
     }
 }
