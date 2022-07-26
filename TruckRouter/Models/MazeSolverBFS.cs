@@ -113,7 +113,7 @@
                 y >= 0 && x < maze.GetLength(1))
             {
 
-                if (!Visited[x, y] &&
+                if (Visited != null && !Visited[x, y] &&
                     (SafePathTokens.IndexOf(maze[x, y]) > -1))
                 {
                     return true;
