@@ -23,10 +23,10 @@ This project is a web service developed using ASP.NET Core Web API in Microsoft 
 From Windows PowerShell or command line, navigate to the build output folder and execute the following command:
 
 ```
-dotnet TruckRouter.dll
+dotnet .\TruckRouter.dll --urls "http://localhost:8080"
 ```
 
-This will launch the Truck Router web service via the Kestrel web server. The service is configured to listen on `http://localhost:8080` but that can be changed in the `hosting.json` configuration file.
+This will launch the Truck Router web service via the Kestrel web server listening on port 8080.
 
 Once the Trucker Router web service is up and running, you can send it requests from an HTTP client such as [Fiddler](http://www.telerik.com/fiddler) or [Postman](https://www.getpostman.com/). See the [API](#api) section below for the endpoint and request/response format. 
 
