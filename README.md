@@ -4,19 +4,19 @@ The goal of this project is to solve a truck routing problem. Given a text maze 
 
 ### Implementation
 
-This project is a web service developed using ASP.NET Core Web API in Microsoft Visual Studio 2017.
+This project is a web service developed using ASP.NET Core Web API in Microsoft Visual Studio.
 
 ### Prerequisites
 
-- [Visual Studio 2017](https://www.visualstudio.com/downloads/)
-- [.NET Core 2.0 SDK or Runtime](https://www.microsoft.com/net/download/core)
+- [Visual Studio](https://www.visualstudio.com/downloads/)
+- [.NET 6.0 SDK or Runtime](https://www.microsoft.com/net/download/core)
 
 ### Installation
 
 1. Clone or download the truck-router repo
-1. Open the solution file "TruckRouter.sln" in Visual Studio 2017
+1. Open the solution file "TruckRouter.sln" in Visual Studio
 1. Change the build configuration to "Release"
-1. Build the solution by selecting Build | Build Solution from the VS 2017 menu
+1. Build the solution by selecting Build | Build Solution from the Visual Studio menu
 
 ### Usage
 
