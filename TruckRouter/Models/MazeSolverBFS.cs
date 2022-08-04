@@ -92,6 +92,11 @@
         /// <param name="y"></param>
         private void ProcessPoint(string[,] maze, Point currPoint, Queue<Point> pointQueue, int x, int y)
         {
+            if (Visited == null)
+            {
+                throw new NullReferenceException($"{0} cannot be null. ");
+            }
+
             if (IsSafePoint(maze, x, y))
             {
                 Visited[x, y] = true;
