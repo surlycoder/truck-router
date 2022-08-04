@@ -1,5 +1,17 @@
 # Truck Router
 
+### Table of Contents
+
+- [Purpose](#purpose)
+- [Implementation](#implementation)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+- [Notes](#notes)
+
+### Purpose
+
 The goal of this project is to solve a truck routing problem. Well, it's actually a maze solving problem but I developed this project as a coding challenge given to me by a former employer, a transportation company, hence the name. Given a text maze with starting point "A" and ending point "B", find the shortest path from "A" to "B".
 
 ### Implementation
@@ -9,7 +21,7 @@ This project is a web service developed using ASP.NET Core Web API in Microsoft 
 ### Prerequisites
 
 - [Visual Studio](https://www.visualstudio.com/downloads/)
-- [.NET 6.0 SDK or Runtime](https://www.microsoft.com/net/download/core)
+- [.NET 6.0](https://www.microsoft.com/net/download/core)
 
 ### Installation
 
