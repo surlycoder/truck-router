@@ -1,6 +1,6 @@
 # Truck Router
 
-The goal of this project is to solve a truck routing problem. Given a text maze with starting point "A" and ending point "B", find the shortest path from "A" to "B".
+The goal of this project is to solve a truck routing problem. Well, it's actually a maze solving problem but I developed this project as a coding challenge given to me by a former employer, a transportation company, hence the name. Given a text maze with starting point "A" and ending point "B", find the shortest path from "A" to "B".
 
 ### Implementation
 
