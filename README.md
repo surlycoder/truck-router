@@ -77,5 +77,5 @@ where @ represents the chosen path.
 ### Notes
 
 - The coding challenge instructions that were given to me specified the input format to be the text maze only, not the text maze wrapped in JSON. Not wanting to make assumptions, I followed the directions to the letter. That's why the endpoint accepts the maze as raw text.
-- I initially implemented the [depth-first search] (https://en.wikipedia.org/wiki/Depth-first_search). Noticing that it did not give the optimal (i.e. shortest) solution, I implemented the [breadth-first search] (https://en.wikipedia.org/wiki/Breadth-first_search). The algorthm is injected at startup in `Program.cs`.
-- 3 sample mazes are located in the root folder (maze1.txt, maze2.txt, maze3.txt), as well as the solutions to those mazes for each algorithm (soln1.txt, soln2.txt, soln3.txt).
+- I initially implemented the [depth-first search](https://en.wikipedia.org/wiki/Depth-first_search). Noticing that it did not give the optimal (i.e. shortest) solution, I implemented the [breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search). The algorthm is injected at startup in [`Program.cs`](TruckRouter/Program.cs).
+- 3 sample mazes are located in the root folder ([`maze1.txt`](maze1.txt), [`maze2.txt`](maze2.txt), [`maze3.txt`](maze3.txt)), as well as the solutions to those mazes for each algorithm ([`soln1.txt`](soln1.txt), [`soln2.txt`](soln2.txt), [`soln3.txt`](soln3.txt)).
