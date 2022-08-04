@@ -1,6 +1,18 @@
 # Truck Router
 
-The goal of this project is to solve a truck routing problem. Given a text maze with starting point "A" and ending point "B", find the shortest path from "A" to "B".
+### Table of Contents
+
+- [Purpose](#purpose)
+- [Implementation](#implementation)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+- [Notes](#notes)
+
+### Purpose
+
+The goal of this project is to solve a truck routing problem. Well, it's actually a maze solving problem but I developed this project as a coding challenge given to me by a former employer, a transportation company, hence the name. Given a text maze with starting point "A" and ending point "B", find the shortest path from "A" to "B".
 
 ### Implementation
 
@@ -9,7 +21,7 @@ This project is a web service developed using ASP.NET Core Web API in Microsoft 
 ### Prerequisites
 
 - [Visual Studio](https://www.visualstudio.com/downloads/)
-- [.NET 6.0 SDK or Runtime](https://www.microsoft.com/net/download/core)
+- [.NET 6.0](https://www.microsoft.com/net/download/core)
 
 ### Installation
 
@@ -73,3 +85,9 @@ The corresponding response is a JSON object:
 ```
 
 where @ represents the chosen path.
+
+### Notes
+
+- The coding challenge instructions that were given to me specified the input format to be the text maze only, not the text maze wrapped in JSON. Not wanting to make assumptions, I followed the directions to the letter. That's why the endpoint accepts the maze as raw text.
+- I initially implemented the [depth-first search](https://en.wikipedia.org/wiki/Depth-first_search). Noticing that it did not give the optimal (i.e. shortest) solution, I implemented the [breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search). The algorthm is injected at startup in [`Program.cs`](TruckRouter/Program.cs).
+- 3 sample mazes are located in the root folder ([`maze1.txt`](maze1.txt), [`maze2.txt`](maze2.txt), [`maze3.txt`](maze3.txt)), as well as the solutions to those mazes for each algorithm ([`soln1.txt`](soln1.txt), [`soln2.txt`](soln2.txt), [`soln3.txt`](soln3.txt)).
