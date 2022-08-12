@@ -40,7 +40,7 @@ dotnet .\TruckRouter.dll --urls "http://localhost:8080"
 
 This will launch the Truck Router web service via the Kestrel web server listening on port 8080.
 
-Once the Trucker Router web service is up and running, you can send it requests from an HTTP client such as [Fiddler](http://www.telerik.com/fiddler) or [Postman](https://www.getpostman.com/). See the [API](#api) section below for the endpoint and request/response format. 
+Once the Trucker Router web service is up and running, you can send it requests from an HTTP client such as [Insomnia](https://insomnia.rest/), [Fiddler](http://www.telerik.com/fiddler), or [Postman](https://www.getpostman.com/). See the [API](#api) section below for the endpoint and request/response format. 
 
 ### API
 
