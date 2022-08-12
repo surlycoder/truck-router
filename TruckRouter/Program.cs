@@ -23,8 +23,6 @@ else
     app.UseAuthorization();
 }
 
-app.UseHttpsRedirection();
-app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
