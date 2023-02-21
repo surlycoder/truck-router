@@ -21,7 +21,7 @@ This project is a web service developed using ASP.NET Core Web API in Microsoft 
 ### Prerequisites
 
 - [Visual Studio](https://www.visualstudio.com/downloads/)
-- [.NET 6.0](https://www.microsoft.com/net/download/core)
+- [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 
 ### Installation
 
